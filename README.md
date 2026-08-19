@@ -11,6 +11,8 @@ don't show up until a query silently returns wrong results in production. This r
 documents the recurring conversion patterns and ships a script that scans a `.sql`
 codebase and flags lines likely to break on Redshift.
 
+![Migration linter flagging Teradata syntax](linter-output.png)
+
 ## What's inside
 
 - **`examples/`** — before/after query pairs for each conversion pattern, with an
