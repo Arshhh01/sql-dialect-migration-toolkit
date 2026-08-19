@@ -1,12 +1,12 @@
-# SQL Dialect Migration Toolkit — Teradata → Amazon Redshift
+# SQL Dialect Migration Toolkit - Teradata → Amazon Redshift
 
 A set of patterns, examples, and a linting script for migrating legacy Teradata SQL
-codebases to Amazon Redshift. Built from lessons learned running a large-scale
+codebases to Amazon Redshift. Built from lessons learned running a large scale
 enterprise data warehouse migration, generalized here with a synthetic schema so the
 patterns are reusable on any Teradata → Redshift project.
 
 Teradata and Redshift are both MPP columnar databases, but they diverge in function
-syntax, NULL handling, window-function semantics, and collation — differences that
+syntax, NULL handling, window-function semantics, and collation differences that
 don't show up until a query silently returns wrong results in production. This repo
 documents the recurring conversion patterns and ships a script that scans a `.sql`
 codebase and flags lines likely to break on Redshift.
@@ -49,7 +49,7 @@ legacy_queries/campaign_summary.sql:14  [QUALIFY]   Redshift has no QUALIFY clau
 legacy_queries/campaign_summary.sql:31  [ZEROIFNULL] No Redshift equivalent — replace with COALESCE(col, 0)
 ```
 
-It's a static-analysis pass, not an auto-fixer — the point is to catch the ~80% of
+It's a static-analysis pass, not an auto-fixer so the point is to catch the ~80% of
 issues that are mechanical before they surface as a production discrepancy, and leave
 the judgment calls (collation, timezone semantics) for a human to resolve deliberately.
 
